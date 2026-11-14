@@ -1,0 +1,600 @@
+{
+  "flight": {
+    "flight_number": "CX251",
+    "route": "HKG -> LHR",
+    "origin": "HKG",
+    "origin_name": "Hong Kong International Airport",
+    "origin_terminal": "Terminal 1",
+    "gate": "65",
+    "destination": "LHR",
+    "destination_name": "London Heathrow Airport",
+    "arrival_terminal": "Terminal 3",
+    "arrival_gate": "24",
+    "baggage_belt": "Belt 5",
+    "aircraft": "Boeing 777-300ER (Aria Suite)",
+    "status": "ON_TIME",
+    "delay_minutes": 0,
+    "departure_time": "23:00",
+    "departure_timezone": "HKT",
+    "scheduled_departure": "23:00 HKT",
+    "arrival_time": "05:40",
+    "arrival_timezone": "GMT",
+    "scheduled_arrival": "05:40 GMT",
+    "in_air_offline": false,
+    "lounge_name": "The Pier, First & Business Lounge (Near Gate 65)",
+    "window_moment": "Venus, the morning star (Left side, ~05:22 GMT estimate)",
+    "window_moment_detail": {
+      "title": "Venus, the morning star",
+      "time_gmt": "05:22 GMT",
+      "side": "Left Side (Seats A)",
+      "conflict_resolution": {
+        "11A": "WAKE_GENTLY",
+        "12K": "NOT_VISIBLE",
+        "14G": "NO_WINDOW",
+        "14K": "NOT_VISIBLE",
+        "11D": "NO_WINDOW"
+      },
+      "confidence": "HIGH",
+      "window_start": "03:28 GMT",
+      "window_end": "05:32 GMT",
+      "reasons": [
+        "Left side",
+        "Brightest planet, low in the sky"
+      ],
+      "computed": true,
+      "moments": [
+        "venus_left"
+      ]
+    }
+  },
+  "personas": {
+    "11A": {
+      "seat": "11A",
+      "name": "Mr. R. Mathur",
+      "tier": "Diamond",
+      "cabin": "Business (Aria Suite)",
+      "archetype": "Time-Critical Executive Traveller",
+      "rhythm_quiz_completed": true,
+      "rhythm_quiz_answers": [
+        {
+          "step": 1,
+          "id": "sleep_priority",
+          "icon": "Moon",
+          "question": "Tonight's Priority",
+          "selection": "Maximise Uninterrupted Sleep",
+          "completed": true
+        },
+        {
+          "step": 2,
+          "id": "dining_pace",
+          "icon": "Utensils",
+          "question": "Dining Preference",
+          "selection": "Express Dine or Pre-Flight Lounge",
+          "completed": true
+        },
+        {
+          "step": 3,
+          "id": "wake_preference",
+          "icon": "Sunrise",
+          "question": "Wake & Window Moments",
+          "selection": "Wake for a Window Moment & Breakfast",
+          "completed": true
+        },
+        {
+          "step": 4,
+          "id": "beverage_memory",
+          "icon": "CupSoda",
+          "question": "Signature Welcome Drink",
+          "selection": "Cathay Delight & Warm Towel",
+          "completed": true
+        },
+        {
+          "step": 5,
+          "id": "work_mode",
+          "icon": "Briefcase",
+          "question": "Cabin Ambience",
+          "selection": "Direct to Rest After Boarding",
+          "completed": true
+        },
+        {
+          "step": 6,
+          "id": "ground_sync",
+          "icon": "Car",
+          "question": "London Arrival Sync",
+          "selection": "Auto-Sync Chauffeur & Executive Assistant",
+          "completed": true
+        }
+      ],
+      "memory_items": [
+        {
+          "id": "pref_drink",
+          "icon": "GlassWater",
+          "category": "In-Flight Dining",
+          "label": "Cathay Delight on boarding; sparkling water with meal",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "pref_sleep",
+          "icon": "Moon",
+          "category": "Rest & Cabin Rhythm",
+          "label": "Skip main meal onboard if dined in lounge; maximise sleep",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "pref_sunrise",
+          "icon": "Sunrise",
+          "category": "Window Moment",
+          "label": "Opt-in: gently wake for a computed Window Moment (left-side window, 11A)",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "pref_ground_driver",
+          "icon": "Car",
+          "category": "Ground Logistics",
+          "label": "Sync LHR Terminal 3 curbside ETA with Blacklane Chauffeur",
+          "consent": "SERVICE_ONLY"
+        },
+        {
+          "id": "pref_board_meeting",
+          "icon": "Lock",
+          "category": "Private Calendar Context",
+          "label": "09:00 GMT Mayfair M&A Board Meeting (Private Reason for Rest)",
+          "consent": "DONT_REMEMBER"
+        }
+      ],
+      "delay_lounge_offer": {
+        "offer_pending": false,
+        "accepted": false,
+        "lounge": "The Pier Lounge (Gate 65)",
+        "headline": "Dine in The Pier Lounge Now -> Gain +65m Onboard Sleep",
+        "description": "CX251 is delayed 40 mins (23:40 HKT departure). Enjoy your full dinner in The Pier Lounge now so crew can convert Suite 11A directly into a flatbed at takeoff.",
+        "sleep_gain_minutes": 65
+      },
+      "window_moment_opt_in": true,
+      "window_moment_action": "Wake gently · open shade · Venus on left (05:22 GMT, estimate)",
+      "crew_card": {
+        "tier1_icons": [
+          {
+            "icon": "Moon",
+            "label": "Max Sleep"
+          },
+          {
+            "icon": "Utensils",
+            "label": "Express Dine"
+          },
+          {
+            "icon": "Sunrise",
+            "label": "Wake: Venus 05:22 GMT"
+          }
+        ],
+        "tier2_line": "Mr. R. Mathur (Diamond) • EN • Cathay Delight • Direct to Rest",
+        "tier3_details": [
+          "Cathay Delight on boarding; sparkling water with meal",
+          "Skip main meal onboard if dined in lounge; maximise sleep",
+          "Opt-in: gently wake for a computed Window Moment (left-side window, 11A)",
+          "2 item(s) filtered from Crew iPad via 3-Way Consent (Guardrails #2 & #4)."
+        ],
+        "discreet_instruction": null,
+        "memory_moment": null
+      },
+      "crew_quick_note": {
+        "sent": false,
+        "note_text": "Preferred extra buckwheat pillow & jasmine tea before landing",
+        "passenger_confirmed": true
+      },
+      "landed_notifications": [
+        {
+          "contact_id": "mathur_pa",
+          "name": "Elena Rostova (Executive Assistant)",
+          "channel": "SMS / WhatsApp",
+          "phone": "+44 7700 900412",
+          "consented": true,
+          "status": "READY_ON_TOUCHDOWN",
+          "message_preview": "CX251 landed at LHR Terminal 3 (Gate 24, Belt 5). Mr. Mathur est. curbside ready at 06:03 GMT."
+        },
+        {
+          "contact_id": "mathur_driver",
+          "name": "Arthur Pendelton (Mayfair Chauffeur)",
+          "channel": "Driver Dispatch Link",
+          "phone": "+44 7700 900899",
+          "consented": true,
+          "status": "READY_ON_TOUCHDOWN",
+          "message_preview": "Live Flight Sync CX251: Touchdown 05:40 GMT. Priority baggage Belt 5. Target pickup Zone A at 06:03 GMT."
+        }
+      ],
+      "pickup_eta": {
+        "destination_airport": "LHR Terminal 3",
+        "touchdown_time": "05:40 GMT",
+        "deplaning_minutes": 8,
+        "priority_baggage_minutes": 15,
+        "estimated_curbside_time": "06:03 GMT",
+        "is_estimate_label": "Estimate (Touchdown + 8m Door 2L Deplaning + 15m Priority Belt 5)",
+        "pickup_zone": "LHR T3 Chauffeur Zone A (Short Stay Level 1)",
+        "driver_name": "Arthur Pendelton — Mercedes S-Class (LD74 CXH)",
+        "shareable_link": "https://cathay.horizon/pickup/cx251-11a-lhr"
+      },
+      "assistance": {
+        "consent": "CREW",
+        "need": {
+          "level": "WCHS",
+          "duration_type": "TEMPORARY",
+          "temporary_until": "2026-05-15",
+          "segments": [
+            "CHECKIN_TO_GATE",
+            "BOARDING",
+            "ARRIVAL_TO_EXIT"
+          ],
+          "communication": [],
+          "own_device": null,
+          "updated_on": "2026-04-28"
+        },
+        "history": [
+          {
+            "flight": "CX524",
+            "date": "2026-04-28",
+            "level": "WCHS",
+            "segments": [
+              "CHECKIN_TO_GATE",
+              "BOARDING",
+              "ARRIVAL_TO_EXIT"
+            ]
+          }
+        ],
+        "requests": {}
+      }
+    },
+    "12K": {
+      "seat": "12K",
+      "name": "Mrs. S. Kapoor",
+      "age": 74,
+      "tier": "Gold",
+      "cabin": "Business (Aria Suite)",
+      "archetype": "Dignified Accessibility & Non-Visible Hearing Assist",
+      "rhythm_quiz_completed": true,
+      "memory_items": [
+        {
+          "id": "kapoor_hearing",
+          "icon": "Ear",
+          "category": "Communication Cue",
+          "label": "Face passenger directly when speaking (discreet crew instruction)",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "kapoor_wheelchair",
+          "icon": "Accessibility",
+          "category": "Assistance Memory",
+          "label": "Wheelchair assistance: can walk short distances (remembered with consent; confirmed each trip)",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "kapoor_tea",
+          "icon": "Coffee",
+          "category": "In-Flight Comfort",
+          "label": "Warm ginger tea after boarding; extra blanket for knees",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "kapoor_family_eta",
+          "icon": "Users",
+          "category": "Arrival Family Sync",
+          "label": "Auto-update son (Aarav Kapoor) with LHR Terminal 3 step-free exit ETA",
+          "consent": "SERVICE_ONLY"
+        }
+      ],
+      "window_moment_opt_in": false,
+      "window_moment_action": "Not visible from this seat (Venus on left)",
+      "crew_card": {
+        "tier1_icons": [
+          {
+            "icon": "Ear",
+            "label": "Face When Speaking"
+          },
+          {
+            "icon": "Coffee",
+            "label": "Warm Ginger Tea"
+          }
+        ],
+        "tier2_line": "Mrs. S. Kapoor (Gold, 74) • EN/HI • Warm Ginger Tea • Step-Free Assist",
+        "tier3_details": [
+          "Face passenger directly when speaking (discreet crew instruction)",
+          "Assistance not yet confirmed for this trip (passenger confirms in app)",
+          "Warm ginger tea after boarding; extra blanket for knees"
+        ],
+        "discreet_instruction": "Face passenger directly when speaking",
+        "memory_moment": null
+      },
+      "landed_notifications": [
+        {
+          "contact_id": "kapoor_son",
+          "name": "Aarav Kapoor (Son — LHR Family Pickup)",
+          "channel": "SMS / WhatsApp",
+          "phone": "+44 7700 900318",
+          "consented": true,
+          "status": "READY_ON_TOUCHDOWN",
+          "message_preview": "Mrs. Kapoor has landed on CX251 at LHR T3. Aircraft-door wheelchair escort active; meeting you at T3 Arrivals Exit B at 06:08 GMT."
+        }
+      ],
+      "pickup_eta": {
+        "destination_airport": "LHR Terminal 3",
+        "touchdown_time": "05:40 GMT",
+        "deplaning_minutes": 12,
+        "priority_baggage_minutes": 16,
+        "estimated_curbside_time": "06:08 GMT",
+        "is_estimate_label": "Estimate (Arrival assistance at aircraft door + Priority Belt 5)",
+        "pickup_zone": "LHR T3 Arrivals Concourse — Family Meeting Point B",
+        "driver_name": "Aarav Kapoor (Son — Family Pickup)",
+        "shareable_link": "https://cathay.horizon/pickup/cx251-12k-lhr"
+      },
+      "assistance": {
+        "consent": "CREW",
+        "need": {
+          "level": "WCHR",
+          "duration_type": "LASTING",
+          "temporary_until": null,
+          "segments": [
+            "CHECKIN_TO_GATE",
+            "BOARDING",
+            "ARRIVAL_TO_EXIT"
+          ],
+          "communication": [
+            "DEAF"
+          ],
+          "own_device": null,
+          "updated_on": "2026-03-02"
+        },
+        "history": [
+          {
+            "flight": "CX524",
+            "date": "2026-03-02",
+            "level": "WCHR",
+            "segments": [
+              "CHECKIN_TO_GATE",
+              "ARRIVAL_TO_EXIT"
+            ]
+          }
+        ],
+        "requests": {}
+      }
+    },
+    "14K": {
+      "seat": "14G/14K",
+      "seat_key": "14K",
+      "name": "The Lee Family (Mr. D. Lee & Leo, age 4)",
+      "tier": "Green / Returning Family",
+      "cabin": "Business (Aria Suite — Center Twin 14G/14K)",
+      "archetype": "Returning Family with Young Child + Strict External Privacy",
+      "rhythm_quiz_completed": true,
+      "memory_items": [
+        {
+          "id": "lee_child_ears",
+          "icon": "Sparkles",
+          "category": "In-Flight Family Memory",
+          "label": "Child (4yo) sensitive to ear pressure on descent — offer warm milk/water 30m prior",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "lee_center_divider",
+          "icon": "Users",
+          "category": "Suite Setup",
+          "label": "Lower center divider between 14G and 14K prior to boarding; kids activity pack",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "lee_external_sms",
+          "icon": "ShieldAlert",
+          "category": "External Third-Party Contact",
+          "label": "External family delay SMS to Grandparents (+44 London landline/mobile)",
+          "consent": "DONT_REMEMBER"
+        }
+      ],
+      "external_sms_consent": "DONT_REMEMBER",
+      "window_moment_opt_in": false,
+      "window_moment_action": "Not visible from this seat (Venus on left)",
+      "crew_card": {
+        "tier1_icons": [
+          {
+            "icon": "Baby",
+            "label": "Child (4yo)"
+          },
+          {
+            "icon": "Milk",
+            "label": "Descent Ear Care"
+          },
+          {
+            "icon": "ShieldCheck",
+            "label": "External SMS Blocked"
+          }
+        ],
+        "tier2_line": "The Lee Family (14G/14K) • EN/CANT • Divider Lowered • Warm Milk on Descent",
+        "tier3_details": [
+          "Child (4yo) sensitive to ear pressure on descent — offer warm milk/water 30m prior",
+          "Returning family from last summer's trip (Leo is now 4): pre-place Cathay kids activity kit at 14K.",
+          "Guardrail #3 Active: External family contact SMS set to DONT_REMEMBER."
+        ],
+        "discreet_instruction": "Proactively lower 14G/14K center suite partition before boarding.",
+        "memory_moment": {
+          "id": "mm_lee_14k",
+          "title": "Proactive Crew Memory Moment",
+          "suggestion": "Child (4yo) sensitive to ear pressure on descent — offer warm milk/water 30m prior",
+          "context": "Remembered from prior Cathay flight history (consented SHARE_WITH_CREW)",
+          "status": "PENDING_CREW_APPROVAL"
+        }
+      },
+      "landed_notifications": [
+        {
+          "contact_id": "lee_external_family",
+          "name": "Grandma Lee (External Family Contact)",
+          "channel": "External SMS",
+          "phone": "+44 7700 900105",
+          "consented": false,
+          "consent_level": "DONT_REMEMBER",
+          "status": "BLOCKED_BY_GUARDRAIL_3",
+          "message_preview": "BLOCKED: Passenger set External Family SMS to DONT_REMEMBER."
+        }
+      ],
+      "pickup_eta": {
+        "destination_airport": "LHR Terminal 3",
+        "touchdown_time": "05:40 GMT",
+        "deplaning_minutes": 12,
+        "priority_baggage_minutes": 18,
+        "estimated_curbside_time": "06:10 GMT",
+        "is_estimate_label": "Estimate (Family Deplaning + Stroller Delivery + Belt 5)",
+        "pickup_zone": "LHR T3 Heathrow Express Step-Free Transfer",
+        "driver_name": "Self-Transfer (External SMS Disabled by Consent)",
+        "shareable_link": null
+      },
+      "assistance": {
+        "consent": "DONT_REMEMBER",
+        "need": null,
+        "history": [],
+        "requests": {}
+      }
+    },
+    "11D": {
+      "seat": "11D",
+      "name": "Ms. L. Chen",
+      "tier": "Gold",
+      "cabin": "Business (Aria Suite)",
+      "archetype": "Strict Do Not Disturb (Max Rest Priority)",
+      "rhythm_quiz_completed": true,
+      "do_not_disturb": true,
+      "memory_items": [
+        {
+          "id": "chen_dnd",
+          "icon": "BellOff",
+          "category": "Rest Protection",
+          "label": "Strict Do Not Disturb (Max Rest) — skip all meal and wake calls",
+          "consent": "SHARE_WITH_CREW"
+        },
+        {
+          "id": "chen_shade",
+          "icon": "EyeOff",
+          "category": "Window & Lighting",
+          "label": "Suppress all Window Moments; keep shade closed throughout flight",
+          "consent": "SHARE_WITH_CREW"
+        }
+      ],
+      "window_moment_opt_in": false,
+      "window_moment_action": "No window at this seat",
+      "crew_card": {
+        "tier1_icons": [
+          {
+            "icon": "BellOff",
+            "label": "Strict DND"
+          },
+          {
+            "icon": "Moon",
+            "label": "Max Rest"
+          },
+          {
+            "icon": "EyeOff",
+            "label": "Shade Closed"
+          }
+        ],
+        "tier2_line": "Ms. L. Chen (Gold) • EN/MAN • Strict Do Not Disturb • Skip All Wake Calls",
+        "tier3_details": [
+          "Strict Do Not Disturb (Max Rest) — skip all meal and wake calls",
+          "Suppress all Window Moments; keep shade closed throughout flight"
+        ],
+        "discreet_instruction": "Suppress all cabin announcements at seat; keep window shade closed.",
+        "memory_moment": null
+      },
+      "landed_notifications": [],
+      "pickup_eta": {
+        "destination_airport": "LHR Terminal 3",
+        "touchdown_time": "05:40 GMT",
+        "deplaning_minutes": 8,
+        "priority_baggage_minutes": 0,
+        "estimated_curbside_time": "05:48 GMT",
+        "is_estimate_label": "Estimate (Carry-On Only Express Exit)",
+        "pickup_zone": "LHR T3 Fast Track Arrivals",
+        "driver_name": "Private Transfer",
+        "shareable_link": null
+      }
+    }
+  },
+  "cabin_brief_summary": {
+    "total_tracked_suites": 4,
+    "resting_count": 2,
+    "express_dine_count": 1,
+    "lounge_dined_count": 0,
+    "assist_count": 0,
+    "sunrise_opt_in_count": 1,
+    "sunrise_suppressed_count": 1,
+    "memory_moments_pending": 1,
+    "purser_headline": "CX251 HKG->LHR (ON TIME (23:00 HKT)) • 2 Max Rest • 1 Express Dine • 0 Assist Confirmed • 1 Window Moment Opt-in"
+  },
+  "agent_audit_log": [
+    {
+      "id": "audit_init_1",
+      "timestamp": "22:15:02 HKT",
+      "feature": "A2_CONSENT_GATE",
+      "persona_seat": "11A",
+      "action": "Loaded Mr. Mathur's 6-Tap Rhythm Profile & 3-Way Consent Matrix",
+      "status": "APPROVED",
+      "guardrail": "Guardrail #1 & #2 Passed: Private Mayfair board meeting marked DONT_REMEMBER and stripped from Crew iPad payload."
+    },
+    {
+      "id": "audit_init_2",
+      "timestamp": "22:15:04 HKT",
+      "feature": "B3_DIGNITY_FILTER",
+      "persona_seat": "12K",
+      "action": "Compiled Mrs. Kapoor's Assist Profile into Tier 1 Icon & Tier 3 Instruction",
+      "status": "APPROVED",
+      "guardrail": "Guardrail #5 Passed: Medical terminology stripped; crew sees actionable cue 'Hearing: face passenger when speaking'."
+    },
+    {
+      "id": "audit_init_3",
+      "timestamp": "22:15:06 HKT",
+      "feature": "B4_MEMORY_MOMENT",
+      "persona_seat": "14K",
+      "action": "Queued Returning Family descent ear-pressure cue for Seats 14G/14K",
+      "status": "APPROVED",
+      "guardrail": "Guardrail #3 Armed: External family contact SMS set to DONT_REMEMBER — outbound third-party messaging locked."
+    },
+    {
+      "id": "audit_init_4",
+      "timestamp": "22:15:08 HKT",
+      "feature": "WINDOW_CONFLICT_RESOLVER",
+      "persona_seat": "11D",
+      "action": "Evaluated computed Window Moments across Cabin Zone A",
+      "status": "SUPPRESSED",
+      "guardrail": "Guardrail #7 Passed: Seat 11D Do Not Disturb overrides cabin event; shade locked closed."
+    }
+  ],
+  "universal_compiler_last_run": null,
+  "skybook_history": [
+    {
+      "id": "skybook_1",
+      "flight_number": "CX251",
+      "route": "HKG -> LHR",
+      "city": "London",
+      "date": "Nov 2026",
+      "aircraft": "Boeing 777-300ER (Aria Suite)",
+      "seat": "11A",
+      "rest_hours_protected": 8.5,
+      "highlight": "English Channel Sunrise witnessed at 05:55 GMT; +65m sleep rescued via The Pier Lounge dining shift.",
+      "memory_evolved": "Cathay Delight welcome drink + Flatbed immediately after takeoff",
+      "pin_coords": {
+        "top": "26%",
+        "left": "46%"
+      }
+    },
+    {
+      "id": "skybook_2",
+      "flight_number": "CX524",
+      "route": "HKG -> NRT",
+      "city": "Tokyo",
+      "date": "Sep 2026",
+      "aircraft": "Airbus A350-900",
+      "seat": "12A",
+      "rest_hours_protected": 4.2,
+      "highlight": "Mount Fuji Sunrise witnessed from Left Window 12A at 05:35 JST; zero wake-up disturbance prior.",
+      "memory_evolved": "Buckwheat pillow preference & Express Arrival Chauffeur Sync saved",
+      "pin_coords": {
+        "top": "38%",
+        "left": "82%"
+      }
+    }
+  ]
+}

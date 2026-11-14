@@ -1,0 +1,24 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node / frontend
+node_modules/
+dist/
+
+# Secrets and local config - never commit API keys (e.g. GEMINI_API_KEY)
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+
+# Local build/download artefacts
+*.zip
+# atomic-write temp files left only if a process is killed mid-write
+backend/data/.*.tmp

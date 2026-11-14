@@ -1,0 +1,8 @@
+{
+  "schema_version": "track-1",
+  "source": "synthetic",
+  "note": "Synthetic CX524 track from SYNTHETIC_ROUTES. TODO(team): replace with a real ADS-B track.",
+  "rows": 228,
+  "duration_min": 227.0,
+  "csv_sha256": "21445c24770e1e47e4beb3099bcc0b720484fe52e15844f1dfc0676dca1a290c"
+}

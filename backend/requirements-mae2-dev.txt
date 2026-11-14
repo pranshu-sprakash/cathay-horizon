@@ -1,0 +1,6 @@
+# Development / test-only dependencies for the MAE #2 module. Not needed at runtime.
+-r requirements-mae2.txt
+pytest>=7.4
+# Test-only FastAPI compatibility harness (tests/test_fastapi_compat.py); not a server.
+fastapi>=0.110
+httpx>=0.25
