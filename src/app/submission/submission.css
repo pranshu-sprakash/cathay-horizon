@@ -1,0 +1,36 @@
+@page {
+  size: A4;
+  margin: 0;
+}
+
+.submission {
+  background: #e9eceb;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: #1d2423;
+}
+
+.submission .page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  padding: 12mm 16mm 18mm;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -18px rgba(0, 40, 40, 0.35);
+}
+
+@media print {
+  .submission {
+    background: #fff;
+    padding: 0;
+    gap: 0;
+  }
+  .submission .page {
+    box-shadow: none;
+    break-after: page;
+  }
+}
