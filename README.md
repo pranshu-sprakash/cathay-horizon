@@ -1,82 +1,168 @@
-# Cathay flight profile: passenger demo
+# Cathay Horizon
 
-A clickable concept demo for the Cathay Hackathon 2026 challenge "Reimagining the Premium Travel Experience". A frequent flyer sets up a flight profile once on the phone (meal and meal timing, rest, seat type, screen language and interests). The seatback TV then opens already personalised: the seat recognises the passenger and loads it. After landing, 15 enamel pins earn bonus status points towards the next membership tier (Green, Silver, Gold, Diamond, Diamond Exec). The recap links to Cathay Shop, where items from the flight can be paid for with Asia Miles and delivered to the next seat.
+**"Cathay remembers, so you never ask twice."** This is the Cathay Pacific Hackathon 2026 prototype: a consent-first passenger memory layer covering pre-flight, in-flight and post-flight, demonstrated on flight **CX251, Hong Kong (HKG) to London Heathrow (LHR)**, 23:00 HKT to 05:40 GMT.
 
-Concept demo, not affiliated with Cathay Pacific. Anything that a real system would provide (seat recognition, live cricket scores, flight data, news feed, pin status points and perks, percentiles, friends, crew and catering figures, shop prices) is simulated and labelled "Simulated" in the UI.
+> **Status.** These parts work: the FastAPI server (8 endpoints), the agent engine with its offline fallbacks, the spatial/flight module (computed Window Moments and assistance memory), and the React frontend.
+> These are still stubs: `frontend/src/components/*.jsx` (waiting for ISDN's drop-ins) and `docs_and_props/` (Business Lead). See [`MERGE_NOTES.md`](MERGE_NOTES.md) for what changed in the merge and the open items.
 
-## Run it
+## Quick start (run once after cloning)
+
+Git never runs code automatically on `git clone`; that is a deliberate security rule. Instead, run **one setup command** after cloning. It creates `backend/.venv`, installs every backend dependency listed below, and runs `npm ci` in `frontend/`.
+
+**Linux / macOS / WSL / Git Bash**
 
 ```bash
-npm install
+git clone <repo-url> cathay-horizon
+```
+```bash
+cd cathay-horizon
+```
+```bash
+bash scripts/setup.sh
+```
+
+**Windows (PowerShell)**
+
+```powershell
+git clone <repo-url> cathay-horizon
+cd cathay-horizon
+powershell -ExecutionPolicy Bypass -File scripts\setup.ps1
+```
+
+**GitHub Codespaces / VS Code Dev Containers.** Open the repo in a Codespace, or choose *Reopen in Container* in VS Code. `.devcontainer/devcontainer.json` runs `scripts/setup.sh` automatically, so this is the only route where installation happens without typing a command.
+
+Both scripts are safe to re-run. Add `--runtime` (bash) or `-Runtime` (PowerShell) to skip the test-only packages. To pick a specific interpreter, set `PYTHON=/path/to/python3.12`.
+
+## Run the demo
+
+Open two terminals. On Windows use `.venv\Scripts\python.exe` instead of `.venv/bin/python`.
+
+Terminal 1, from `backend/`: start the API on http://localhost:8000.
+
+```bash
+.venv/bin/python -m uvicorn main:app --port 8000
+```
+
+Terminal 2, from `frontend/`: start the React app.
+
+```bash
 npm run dev
 ```
 
-Open http://localhost:4317. The dev server binds to port 4317 on all interfaces.
+The frontend polls `http://<host>:8000/api/state` every second. If the backend is unreachable it falls back to `frontend/public/mock_state.json`.
 
-- http://localhost:4317 is the interactive demo.
-- http://localhost:4317/submission is the written submission: 14 A4 pages that scroll, covering insights, problem framing, the solution, preliminary design, architecture, technology and validation.
+Run the tests from `backend/`. They run offline and include the server endpoints.
 
-## Deliverables
+```bash
+.venv/bin/python -m pytest tests -q
+```
 
-- **One-minute video**: `CUT=minute node scripts/make-final.mjs <workDir> <mediaDir>` writes `journey-minute.mp4` (about 60 s). It follows Mr Mathur from the seat push-in through setup, the flight map, news and sport, landing and pins, the tier ladder and a Cathay Shop purchase.
-- **PDF**: `node scripts/submission-assets.mjs` captures the screenshots into `public/submission/`. Then `node scripts/make-pdf.mjs <out.pdf>` prints `/submission` to an A4 PDF. Add `PNG=<dir>` to also write a preview image of every page.
+## Prerequisites
 
-Both need the dev server running.
+| Tool | Version | Needed for |
+|---|---|---|
+| Python | **3.10 or newer** (tested 3.10.20, 3.11.18, 3.12.3, 3.13.18) | backend |
+| pip + venv | ships with Python (on Debian/Ubuntu: `sudo apt install python3-venv`) | backend |
+| Node.js + npm | LTS (tested Node 22.23 / npm 10.9) | frontend |
+| Git | any recent version | cloning |
 
-## Demo controls
+## Dependencies
 
-The bar at the top switches between:
+### Backend runtime (`backend/requirements.txt`, owner: CS Lead)
 
-- **Phone app**: the Cathay app (Home, Offers, Earn, Redeem, Profile) for setup, pins, the tier ladder, the status card, the recap and Cathay Shop.
-- **Seatback TV**: a 16:9 StudioCX-style seat screen: seat idle, recognition, home, flight map, news, sport and arrival.
-- **What Cathay sees**: one summary of what the airline can act on for the flight (meal load, service plan, crew card).
-- **Pitch**: eight 16:9 slides: problem, passenger, product, a step-by-step pipeline, Cathay and data value, feasibility and the pilot.
+| Package | Allowed range | Tested | Purpose |
+|---|---|---|---|
+| `fastapi` | `>=0.110.0` | 0.163.0 | the API server (`main.py`) |
+| `uvicorn[standard]` | `>=0.29.0` | 0.54.0 | ASGI server |
+| `pydantic` | `>=2.7.0` | 2.14.3 | data models (via FastAPI) |
+| `requests` | `>=2.31.0` | 2.34.2 | the explicit weather refresh (Open-Meteo) |
+| `google-genai` | `>=1.0.0` | 3.3.0 | optional Gemini enrichment in `agent_engine.py`; deterministic fallback when unavailable |
+| `ephem` (PyEphem) | `>=4.1,<5` | 4.2.1 | sun, moon and Venus positions (`spatial_and_flight.py`) |
+| `geographiclib` | `>=2.0,<3` | 2.1 | WGS84 geodesics |
+| `numpy` | `>=1.26,<3` | 1.26.4, 2.2.6, 2.4.6, 2.5.4 | vectorised geometry and statistics |
 
-Switching to the seatback TV plays a photo push-in onto seat 11A's screen. It is a real Cathay business suite split into depth layers. The live TV is warped onto the screen glass at full resolution and flattens in one continuous move. Add `intro=1` for the title card hold used in the video. Turn off **Seat zoom** in the bar to go straight to the TV.
+`backend/requirements-mae2.txt` holds the last three again, for installing the module on its own. pip picks a NumPy build that matches your Python. **Don't pin `numpy==2.5.x`**, because it breaks Python 3.10 and 3.11.
 
-Keyboard shortcuts: `1` phone, `2` TV, `3` What Cathay sees, `4` Pitch, `h` hide the control bar. In Pitch, the arrow keys, Page Up and Page Down, and the space bar move between slides.
+### Backend development and test (`backend/requirements-mae2-dev.txt`, skipped with `--runtime`)
 
-URL parameters jump straight to a screen, which is useful for screenshots. For example: `/?fresh=1&bare=1&profile=anil&view=tv&tv=map&saved=1`.
+| Package | Allowed range | Tested | Purpose |
+|---|---|---|---|
+| `pytest` | `>=7.4` | 9.2.0 | test runner |
+| `fastapi` | `>=0.110` | 0.162–0.163 | the test-only harness and the server tests |
+| `httpx` | `>=0.25` | 0.28.1 | required by FastAPI's `TestClient` |
 
-- `fresh=1` ignores saved state, and `bare=1` hides the control bar.
-- `view=phone|tv|cathay|pitch` picks the view.
-- `phone=home|offers|setup|saved|recap|profile|pins|badge|tiers|card|data|shop` and `step=0..4` pick a phone screen and setup step. `badge=<id>` picks the pin shown on `phone=badge`.
-- `tv=idle|welcome|home|map|news|sport|arrival` picks a TV screen.
-- `saved=1` marks the profile as saved, and `flown=1` marks the flight as landed.
-- `zoom=0` skips the seat zoom. `zoomstill=1` keeps the zoom on screen so it can be stepped frame by frame. `blank=1` clears Mr Mathur's meal and rest choices so the setup taps show on screen.
-- `slide=0..7` and `pstep=1..5` pick a pitch slide and pipeline step.
-- `device=1` renders the phone on its own, for asset capture.
+### Transitive Python packages
 
-## Suggested journey
+pip installs these automatically. Versions are from a fresh clone on Python 3.13:
 
-1. Phone: from Home, tap **Set up flight profile**, step through Meal, Rest, Seat and Screen, then tap **Save and send to seat 11A**.
-2. Tap **See it on the seat screen**. The seat push-in lands on the flight map. Use **Menu** for news and sport.
-3. Tap the time-remaining pill (top left) to land. The arrival screen unlocks the Set Once pin and Diamond Exec. Tap **Open in the Cathay app**.
-4. In the app, open Earn (pins, percentiles, friends), Redeem (tier ladder) and the recap, then Cathay Shop: pick an item, pay with Asia Miles and choose delivery to the next seat.
-5. End on **What Cathay sees** (press `3`).
+> annotated-doc 0.0.6, annotated-types 0.8.0, anyio 4.16.0, certifi 2026.10.23, cffi 2.1.1, charset-normalizer 3.5.2, click 8.5.1, cryptography 50.0.2, distro 1.9.0, google-auth 2.62.2, h11 0.16.0, httpcore 1.0.9, httpcore2 2.16.0, httptools 0.9.0, httpx2 2.16.0, idna 3.20, iniconfig 2.3.1, opentelemetry-api 1.45.2, packaging 26.3, pluggy 1.7.0, pyasn1 0.6.5, pyasn1-modules 0.4.2, pycparser 3.12, pydantic-core 2.50.4, Pygments 2.21.0, python-dotenv 1.2.4, PyYAML 6.0.3, sniffio 1.3.1, starlette 1.10.0, tenacity 9.1.4, truststore 0.10.5, typing-extensions 4.16.0, typing-inspection 0.4.5, urllib3 2.8.0, uvloop 0.23.0, watchfiles 1.3.0, websockets 17.4
 
-## Scripts
+### Frontend (`frontend/package.json` + `package-lock.json`, owner: ISDN)
 
-- `scripts/make-final.mjs`: builds a video cut. `CUT=minute` (the one-minute video) or `CUT=final` (the longer 1:35 cut). The steps:
-  - `scripts/render-seat.mjs` renders the title card and photo push-in offline, one fully rasterised frame at a time, so headless capture never drops frames.
-  - `scripts/record-<cut>.mjs` records the rest with captions, the end card and logged click times.
-  - A soft UI tick is synthesised at every click, and everything is joined into `journey-<cut>.mp4` with H.264 video and AAC audio.
-  - `HOLD=<factor>` scales the holds. `SKIP_SEAT=1` reuses rendered push-in frames.
-- `scripts/screens.mjs`: captures 1920×1080 screenshots of every screen and pitch slide.
-- `scripts/pitch-assets.mjs`: captures the images used on the pitch slides into `public/pitch/`.
+| Package | Range | Installed (`npm ci`) | Purpose |
+|---|---|---|---|
+| `react`, `react-dom` | `^19.3.1` | 19.3.1 | UI |
+| `lucide-react` | `^1.73.0` | 1.73.0 | icons |
+| `vite` (dev) | `^8.3.6` | 8.3.8 | dev server and build |
+| `@vitejs/plugin-react` (dev) | `^6.1.2` | 6.3.0 | React support for Vite |
+| `oxlint` (dev) | `^1.90.0` | 1.93.0 | linting (`npm run lint`) |
+| `@types/react`, `@types/react-dom` (dev) | `^19.3.0` | 19.3.0 | editor types |
 
-All capture scripts launch Chromium with `--font-render-hinting=none`. Without it, headless Chromium on Linux rounds each glyph advance to a whole pixel, which opens visible gaps inside words at small sizes.
+### Environment variables, secrets and external services
 
-## Type
+| Item | Required? | Notes |
+|---|---|---|
+| `GEMINI_API_KEY` | No | Read by `agent_engine.py`. If it's unset, or the call fails or times out, the engine uses deterministic offline output. Put it in a local `.env` and **never commit it** (`.env` is git-ignored). |
+| `CATHAY_REFRESH_WEATHER=1` | No | Makes `main.py` fetch a live Open-Meteo forecast at startup (bounded to 3 s). Off by default, so the demo stays offline and the committed sample in `backend/data/cached_weather.json` is left alone. |
+| Open-Meteo forecast API | No | Free, no key. Only contacted by the refresh above. |
 
-The app uses Funnel Sans (Google Fonts, OFL), the closest free match to Cathay's proprietary CathaySans: the same geometric grotesque build, epsilon-style ampersand and straight-tailed "y". Body text is set at weight 360.
+## Useful commands
 
-## Credits
+All commands run from the repo root.
 
-- Cabin photo: "Cathay Pacific 77W business class seat" by Sunnya343, Wikimedia Commons, CC BY-SA 3.0. `scripts/prep-cabin.py` grades it and builds the layers in `public/media/cabin/` (it needs `opencv-python-headless` and `numpy`).
-- Cathay Shop photos: Hong Kong-style milk tea by WiNG (CC BY-SA 3.0), Cathay Delight by N509FZ (CC BY-SA 4.0) and the DC-3 at Cathay City by LN9267 (CC BY-SA 4.0), all Wikimedia Commons.
-- Logo and brushwing: Cathay Pacific marks from Wikipedia. Globe: NASA Black Marble. Seat idle image: NASA Landsat, Pearl River Delta 1973. Pin artwork is drawn in SVG for this demo. Posters and stadium photos are from Wikipedia and Wikimedia Commons, used for a non-commercial pitch demo only.
+**Regenerate the frontend's offline preview** (`frontend/public/mock_state.json`) after changing backend state logic. Add `--source` to also rewrite `backend/initial_state.json`.
 
-## Stack
+```bash
+backend/.venv/bin/python scripts/export_state_snapshots.py --source
+```
 
-Next.js 16 (App Router), TypeScript, Tailwind CSS 4, shadcn/ui (Base UI), lucide icons. Playwright and ffmpeg are used only by the asset scripts.
+**Window Moments CLI demo**, offline:
+
+```bash
+backend/.venv/bin/python backend/spatial_and_flight.py
+```
+
+**Fetch a live weather forecast** into the cache:
+
+```bash
+backend/.venv/bin/python backend/spatial_and_flight.py --refresh-weather
+```
+
+**Lint and build the frontend**, from `frontend/`:
+
+```bash
+npm run lint
+```
+```bash
+npm run build
+```
+
+## Repository layout
+
+```
+cathay-horizon/
+├── README.md, CONTRIBUTING.md, MERGE_NOTES.md, .gitignore
+├── .devcontainer/devcontainer.json      # Codespaces / Dev Containers: auto-runs setup
+├── scripts/
+│   ├── setup.sh, setup.ps1              # one-command setup after cloning
+│   └── export_state_snapshots.py        # regenerate mock_state.json / initial_state.json
+├── backend/
+│   ├── main.py, initial_state.json, requirements.txt   # CS Lead: FastAPI server (8 endpoints) + state
+│   ├── agent_engine.py, cached_ai_outputs.json          # MAE #1: embedded AI + 8 guardrails
+│   ├── spatial_and_flight.py, state_sync.py             # MAE #2: schedule, Window Moments, assistance
+│   ├── requirements-mae2.txt, requirements-mae2-dev.txt, README_MAE2.md, MAE2_REPAIR_REPORT.md
+│   ├── data/                                            # tracks (CX251, CX524), landmarks, weather, fallback
+│   └── tests/                                           # 196 offline tests incl. the server endpoints
+├── frontend/                            # ISDN: React 19 + Vite 8 (src/App.jsx; components/ are stubs)
+└── docs_and_props/                      # Business Lead: placeholders
+```

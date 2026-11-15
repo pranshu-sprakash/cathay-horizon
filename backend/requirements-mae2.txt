@@ -1,0 +1,8 @@
+# Runtime dependencies of backend/spatial_and_flight.py (MAE #2). Supported: Python >= 3.10.
+# Ranges, not pins: pip selects a NumPy wheel that supports the running interpreter
+# (NumPy 2.2.x is the last series for Python 3.10, 2.3+ needs 3.11, 2.5+ needs 3.12).
+# Versions actually tested are listed in MAE2_REPAIR_REPORT.md.
+ephem>=4.1,<5
+geographiclib>=2.0,<3
+numpy>=1.26,<3
+requests>=2.31,<3

@@ -1,0 +1,7 @@
+{
+  "schema_version": "landmarks-1",
+  "landmarks": [
+    {"id": "fuji", "name": "Mt. Fuji", "short_name": "Fuji", "lat": 35.3606, "lon": 138.7274, "elev_m": 3776,
+     "type": "mountain", "icon": "mountain", "min_lighting": "SILHOUETTE", "cloud_rule": "summit_above_low_cloud"}
+  ]
+}
